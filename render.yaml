@@ -4,12 +4,20 @@ services:
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --no-access-log
     healthCheckPath: /healthz
     envVars:
       - key: PYTHON_VERSION
         value: 3.13.5
       - key: GEMINI_API_KEY
         sync: false
-      - key: GEMINI_MODEL
+      - key: GEMINI_WORKOUT_MODEL
+        value: gemini-3.8-flash
+      - key: GEMINI_TIP_MODEL
         value: gemini-3.5-flash-lite
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+# Free service storage is temporary. For durable SQLite storage, use a service
+# with a persistent disk and set DATABASE_URL to sqlite:////var/data/fitbuddy.db.
