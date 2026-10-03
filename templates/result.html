@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Your plan · FitBuddy{% endblock %}
+{% block content %}
+<section class="hero"><p class="eyebrow">YOUR WEEK STARTS HERE</p><h1>{{ user.name }}’s fitness plan</h1><p>{{ user.goal | title }} · {{ user.intensity | title }} intensity · {{ user.duration }} minutes</p></section>
+<p class="notice">Bookmark this private page to return to your plan. Anyone with this link can view and update it.</p>
+<div class="columns"><section class="card"><div class="section-head"><h2>7-day workout</h2><span class="badge">Version {{ user.plans | length }}</span></div><div class="plan">{{ plan.content }}</div></section>
+<aside><section class="card"><p class="eyebrow">FUEL & RECOVER</p><h2>Your nutrition tip</h2><p>{{ plan.nutrition_tip }}</p></section>
+<section class="card"><h2>Make it work for you</h2><p>Tell us what to change. Your original plan will stay saved.</p><form action="/submit-feedback" method="post"><input type="hidden" name="access_token" value="{{ user.access_token }}"><label for="feedback">Your feedback</label><textarea id="feedback" name="feedback" maxlength="2000" required placeholder="More cardio, shorter sessions, or another rest day…"></textarea><button type="submit">Update my plan</button></form></section></aside></div>
+{% if user.plans | length > 1 %}<section class="card"><h2>Your plan history</h2>{% for previous in user.plans | reverse %}<details><summary>Version {{ user.plans | length - loop.index0 }} · {{ previous.created_at.strftime('%d %b %Y, %H:%M') }} UTC</summary>{% if previous.feedback %}<p><strong>Feedback:</strong> {{ previous.feedback }}</p>{% endif %}<div class="plan">{{ previous.content }}</div></details>{% endfor %}</section>{% endif %}
+{% endblock %}
