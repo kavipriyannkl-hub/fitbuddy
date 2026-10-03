@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{% block title %}FitBuddy{% endblock %}</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><header><nav class="wrap"><a class="brand" href="/">FitBuddy<span>YOUR FITNESS, YOUR WAY</span></a><div><a href="/">Create a plan</a><a href="/nutrition-tip">Nutrition tip</a><a href="/view-all-users">Coach dashboard</a></div></nav></header>
+<main class="wrap">{% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}{% block content %}{% endblock %}</main>
+<footer class="wrap">Powered by Gemini · General fitness guidance, not medical advice.</footer>
+<script>document.querySelectorAll('form').forEach(form => form.addEventListener('submit', () => { const button = form.querySelector('button[type="submit"]'); if (button) { button.disabled = true; button.textContent = 'Working on it…'; } }));</script>
+</body></html>

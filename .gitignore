@@ -17,3 +17,5 @@ env/
 Thumbs.db
 .idea/
 .vscode/
+*.db
+*.db-*
