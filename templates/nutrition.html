@@ -1,0 +1,4 @@
+{% extends "base.html" %}
+{% block title %}Nutrition & recovery · FitBuddy{% endblock %}
+{% block content %}<section class="hero"><p class="eyebrow">SMALL HABITS, STEADY PROGRESS</p><h1>Fuel your fitness.</h1><p>A practical nutrition or recovery tip for your goal.</p></section>
+<section class="card narrow"><form action="/nutrition-tip" method="post"><label for="goal">Fitness goal</label><select id="goal" name="goal" required>{% for option in ['weight loss', 'muscle gain', 'general wellness', 'improve endurance', 'increase strength'] %}<option value="{{ option }}" {% if goal == option %}selected{% endif %}>{{ option | title }}</option>{% endfor %}</select><p class="muted">Your selected goal is sent to Google Gemini to generate this tip.</p><button type="submit">Get my tip</button></form>{% if tip %}<div class="tip"><h2>Your tip</h2><p>{{ tip }}</p></div>{% endif %}</section>{% endblock %}
